@@ -3,15 +3,16 @@ const app = express();
 const bodyParser = require("body-parser");
 const port = 3000;
 const axios = require("axios");
+require("dotenv").config();
 
-const apiKey = "a9c8fa09730cebae1c4dc8b883468c4e";
+const apiKey = process.env.API_KEY;
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index", { weather: null, error: null });
 });
 
 app.post("/", (req, res) => {
